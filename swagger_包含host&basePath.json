@@ -1,0 +1,703 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "AUTH模块接口文档",
+        "contact": {},
+        "license": {
+            "name": "Powered By ruoyi",
+            "url": "https://ruoyi.vip"
+        }
+    },
+    "host": "192.168.1.208:8080",
+    "basePath": "/auth",
+    "tags": [{
+        "name": "登录管理",
+        "description": "Token Controller"
+    }],
+    "paths": {
+        "/forgetTheMsg": {
+            "get": {
+                "tags": ["登录管理"],
+                "summary": "忘记密码短信发送",
+                "operationId": "forgetTheMsgUsingGET",
+                "produces": ["*/*"],
+                "parameters": [{
+                    "name": "phone",
+                    "in": "query",
+                    "description": "手机号",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "R«string»",
+                            "$ref": "#/definitions/R«string»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [{
+                    "Authorization": ["global"]
+                }, {
+                    "ShopId": ["global"]
+                }],
+                "deprecated": false
+            }
+        },
+        "/forgetThePassword": {
+            "post": {
+                "tags": ["登录管理"],
+                "summary": "忘记密码",
+                "operationId": "forgetThePasswordUsingPOST",
+                "consumes": ["application/json"],
+                "produces": ["*/*"],
+                "parameters": [{
+                    "in": "body",
+                    "name": "forgetThePassword",
+                    "description": "forgetThePassword",
+                    "required": true,
+                    "schema": {
+                        "originalRef": "订单表",
+                        "$ref": "#/definitions/订单表"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "R«string»",
+                            "$ref": "#/definitions/R«string»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [{
+                    "Authorization": ["global"]
+                }, {
+                    "ShopId": ["global"]
+                }],
+                "deprecated": false
+            }
+        },
+        "/getMsg": {
+            "get": {
+                "tags": ["登录管理"],
+                "summary": "获取手机验证码",
+                "operationId": "getMsgUsingGET",
+                "produces": ["*/*"],
+                "parameters": [{
+                    "name": "phone",
+                    "in": "query",
+                    "description": "手机号",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "R«object»",
+                            "$ref": "#/definitions/R«object»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [{
+                    "Authorization": ["global"]
+                }, {
+                    "ShopId": ["global"]
+                }],
+                "deprecated": false
+            }
+        },
+        "/healthCheck": {
+            "get": {
+                "tags": ["登录管理"],
+                "summary": "healthCheck",
+                "operationId": "healthCheckUsingGET",
+                "produces": ["*/*"],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [{
+                    "Authorization": ["global"]
+                }, {
+                    "ShopId": ["global"]
+                }],
+                "deprecated": false
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": ["登录管理"],
+                "summary": "login",
+                "operationId": "loginUsingPOST",
+                "consumes": ["application/json"],
+                "produces": ["*/*"],
+                "parameters": [{
+                    "in": "body",
+                    "name": "form",
+                    "description": "form",
+                    "required": true,
+                    "schema": {
+                        "originalRef": "LoginBody",
+                        "$ref": "#/definitions/LoginBody"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "R«object»",
+                            "$ref": "#/definitions/R«object»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [{
+                    "Authorization": ["global"]
+                }, {
+                    "ShopId": ["global"]
+                }],
+                "deprecated": false
+            }
+        },
+        "/loginMsg": {
+            "get": {
+                "tags": ["登录管理"],
+                "summary": "手机登录短信发送",
+                "operationId": "phoneLoginMsgUsingGET",
+                "produces": ["*/*"],
+                "parameters": [{
+                    "name": "phone",
+                    "in": "query",
+                    "description": "手机号",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "R«string»",
+                            "$ref": "#/definitions/R«string»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [{
+                    "Authorization": ["global"]
+                }, {
+                    "ShopId": ["global"]
+                }],
+                "deprecated": false
+            }
+        },
+        "/logout": {
+            "delete": {
+                "tags": ["登录管理"],
+                "summary": "退出",
+                "operationId": "logoutUsingDELETE",
+                "produces": ["*/*"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "R«object»",
+                            "$ref": "#/definitions/R«object»"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "security": [{
+                    "Authorization": ["global"]
+                }, {
+                    "ShopId": ["global"]
+                }],
+                "deprecated": false
+            }
+        },
+        "/msgLogin": {
+            "post": {
+                "tags": ["登录管理"],
+                "summary": "短信登录",
+                "operationId": "msgLoginUsingPOST",
+                "consumes": ["application/json"],
+                "produces": ["*/*"],
+                "parameters": [{
+                    "in": "body",
+                    "name": "userRegister",
+                    "description": "userRegister",
+                    "required": true,
+                    "schema": {
+                        "originalRef": "UserRegister",
+                        "$ref": "#/definitions/UserRegister"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "R«object»",
+                            "$ref": "#/definitions/R«object»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [{
+                    "Authorization": ["global"]
+                }, {
+                    "ShopId": ["global"]
+                }],
+                "deprecated": false
+            }
+        },
+        "/phoneLogin": {
+            "post": {
+                "tags": ["登录管理"],
+                "summary": "登录",
+                "operationId": "phoneLoginUsingPOST",
+                "consumes": ["application/json"],
+                "produces": ["*/*"],
+                "parameters": [{
+                    "in": "body",
+                    "name": "userRegister",
+                    "description": "userRegister",
+                    "required": true,
+                    "schema": {
+                        "originalRef": "UserRegister",
+                        "$ref": "#/definitions/UserRegister"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "R«object»",
+                            "$ref": "#/definitions/R«object»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [{
+                    "Authorization": ["global"]
+                }, {
+                    "ShopId": ["global"]
+                }],
+                "deprecated": false
+            }
+        },
+        "/refresh": {
+            "post": {
+                "tags": ["登录管理"],
+                "summary": "刷新令牌",
+                "operationId": "refreshUsingPOST",
+                "consumes": ["application/json"],
+                "produces": ["*/*"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "R«object»",
+                            "$ref": "#/definitions/R«object»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [{
+                    "Authorization": ["global"]
+                }, {
+                    "ShopId": ["global"]
+                }],
+                "deprecated": false
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": ["登录管理"],
+                "summary": "注册",
+                "operationId": "registerUsingPOST",
+                "consumes": ["application/json"],
+                "produces": ["*/*"],
+                "parameters": [{
+                    "in": "body",
+                    "name": "userRegister",
+                    "description": "userRegister",
+                    "required": true,
+                    "schema": {
+                        "originalRef": "UserRegister",
+                        "$ref": "#/definitions/UserRegister"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "R«object»",
+                            "$ref": "#/definitions/R«object»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [{
+                    "Authorization": ["global"]
+                }, {
+                    "ShopId": ["global"]
+                }],
+                "deprecated": false
+            }
+        },
+        "/registerMsg": {
+            "get": {
+                "tags": ["登录管理"],
+                "summary": "注册验证码",
+                "operationId": "registerMsgUsingGET",
+                "produces": ["*/*"],
+                "parameters": [{
+                    "name": "phone",
+                    "in": "query",
+                    "description": "手机号",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "R«string»",
+                            "$ref": "#/definitions/R«string»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [{
+                    "Authorization": ["global"]
+                }, {
+                    "ShopId": ["global"]
+                }],
+                "deprecated": false
+            }
+        },
+        "/setMsgCode": {
+            "get": {
+                "tags": ["登录管理"],
+                "summary": "设置短信验证码",
+                "operationId": "setMsgCodeUsingGET",
+                "produces": ["*/*"],
+                "parameters": [{
+                    "name": "code",
+                    "in": "query",
+                    "description": "验证码",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "phone",
+                    "in": "query",
+                    "description": "手机号",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "type",
+                    "in": "query",
+                    "description": "验证类型",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [{
+                    "Authorization": ["global"]
+                }, {
+                    "ShopId": ["global"]
+                }],
+                "deprecated": false
+            }
+        },
+        "/wxLogin": {
+            "get": {
+                "tags": ["登录管理"],
+                "summary": "wxLogin",
+                "operationId": "wxLoginUsingGET",
+                "produces": ["*/*"],
+                "parameters": [{
+                    "name": "code",
+                    "in": "query",
+                    "description": "code",
+                    "required": true,
+                    "type": "string"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "R«object»",
+                            "$ref": "#/definitions/R«object»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "security": [{
+                    "Authorization": ["global"]
+                }, {
+                    "ShopId": ["global"]
+                }],
+                "deprecated": false
+            }
+        }
+    },
+    "securityDefinitions": {
+        "Authorization": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        },
+        "ShopId": {
+            "type": "apiKey",
+            "name": "ShopId",
+            "in": "header"
+        }
+    },
+    "definitions": {
+        "LoginBody": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "username": {
+                    "type": "string"
+                },
+                "uuid": {
+                    "type": "string"
+                }
+            },
+            "title": "LoginBody"
+        },
+        "R«object»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "状态码"
+                },
+                "data": {
+                    "type": "object",
+                    "description": "数据"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息体"
+                }
+            },
+            "title": "R«object»"
+        },
+        "R«string»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "状态码"
+                },
+                "data": {
+                    "type": "string",
+                    "description": "数据"
+                },
+                "msg": {
+                    "type": "string",
+                    "description": "消息体"
+                }
+            },
+            "title": "R«string»"
+        },
+        "UserRegister": {
+            "type": "object",
+            "required": ["code", "password", "phone", "uuid"],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "验证码"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "登录密码"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "手机号码"
+                },
+                "uuid": {
+                    "type": "string",
+                    "description": "验证码id"
+                }
+            },
+            "title": "UserRegister"
+        },
+        "订单表": {
+            "type": "object",
+            "required": ["code", "confirmPasswrod", "newPasswrod", "phone"],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "验证码"
+                },
+                "confirmPasswrod": {
+                    "type": "string",
+                    "description": "确认的密码"
+                },
+                "newPasswrod": {
+                    "type": "string",
+                    "description": "新密码"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "手机号码"
+                }
+            },
+            "title": "订单表"
+        }
+    }
+}

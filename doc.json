@@ -1,0 +1,3624 @@
+{
+    "schemes": ["http"],
+    "swagger": "2.0",
+    "info": {
+        "description": "ocean API",
+        "title": "ocean API",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {},
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "",
+    "basePath": "/",
+    "paths": {
+        "/v1/daemon/capsules": {
+            "get": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "获取扭蛋",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "a,b,c",
+                        "description": "联表",
+                        "name": "joins",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "example": 1,
+                        "description": "第几页, 1开始",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "example": "query={}",
+                        "description": "查询语句",
+                        "name": "query",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 100,
+                        "example": 100,
+                        "description": "一页返回多少行数据",
+                        "name": "size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "id desc",
+                        "example": "id desc",
+                        "description": "排序规则",
+                        "name": "sort",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/entities.Capsule"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "创建扭蛋",
+                "parameters": [
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entities.Capsule"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Capsule"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "删除扭蛋",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Capsule"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/capsules/use/{id}": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "使用扭蛋",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "使用结果",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/dto.UseResult"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/capsules/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "获取单个扭蛋",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Capsule"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "完整更新单个扭蛋",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entities.Capsule"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Capsule"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "局部更新单个扭蛋",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entities.Capsule"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Capsule"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/categories": {
+            "get": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "获取精灵分类",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "a,b,c",
+                        "description": "联表",
+                        "name": "joins",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "example": 1,
+                        "description": "第几页, 1开始",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "example": "query={}",
+                        "description": "查询语句",
+                        "name": "query",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 100,
+                        "example": 100,
+                        "description": "一页返回多少行数据",
+                        "name": "size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "id desc",
+                        "example": "id desc",
+                        "description": "排序规则",
+                        "name": "sort",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/entities.Category"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "创建精灵分类",
+                "parameters": [
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entities.Category"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Category"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/categories/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "获取单个精灵分类",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "description": "加载精灵 Spirits",
+                        "name": "[]joins",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Category"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "完整更新单个精灵分类",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entities.Category"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Category"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "删除精灵分类",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Category"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "局部更新单个精灵分类",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entities.Category"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Category"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/categories/{id}/spirits": {
+            "put": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "一组精灵Id替换到分类",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "description": "精灵Ids",
+                        "name": "ids",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/entities.Spirit"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "一组精灵Id添加到分类",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "description": "精灵Ids",
+                        "name": "ids",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/entities.Spirit"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "一组精灵Id从分类删除",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "description": "精灵Ids",
+                        "name": "ids",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/entities.Spirit"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/categories/{id}/spirits/clear": {
+            "delete": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "精灵分类清除",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/e.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/categories/{id}/spirits/count": {
+            "get": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "精灵分类精灵计数",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "number"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits": {
+            "get": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "获取精灵",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "a,b,c",
+                        "description": "联表",
+                        "name": "joins",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "example": 1,
+                        "description": "第几页, 1开始",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "example": "query={}",
+                        "description": "查询语句",
+                        "name": "query",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 100,
+                        "example": 100,
+                        "description": "一页返回多少行数据",
+                        "name": "size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "id desc",
+                        "example": "id desc",
+                        "description": "排序规则",
+                        "name": "sort",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/entities.Spirit"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "创建精灵",
+                "parameters": [
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entities.Spirit"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Spirit"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits/click": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "点击首页精灵",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/dto.ClickResult"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits/close-trade/{id}": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "关闭交易",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.UserSpirit"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits/draw-entrust-reward/{index}": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "领取托管奖励(假的)",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "index",
+                        "name": "index",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits/draw-entrust-rewards": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "领取托管奖励(真的)",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits/draw-friend-spirit/{code}": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "领取好友精灵",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "code",
+                        "name": "code",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.UserSpirit"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits/entrust": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "托管精灵获取离线收益",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "boolean"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits/guard/{id}": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "守护",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.UserSpirit"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits/not-new/{id}": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "取消新精灵的标识",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.UserSpirit"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits/open-trade/{id}": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "开始交易",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.UserSpirit"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits/replace-guardian": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "替换守护者",
+                "parameters": [
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.ReplaceGuardianReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.UserSpirit"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits/transform": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "属性加成值",
+                "parameters": [
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.TransformReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "integer"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits/transform-multiple": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "多属性加成值",
+                "parameters": [
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.TransformMultipleReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits/unguard/{id}": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "取消守护",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.UserSpirit"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits/up/{id}": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "上主位",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/dto.UpResult"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/spirits/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "获取单个精灵",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Spirit"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "完整更新单个精灵",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entities.Spirit"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Spirit"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "删除单个精灵",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Spirit"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "局部更新单个精灵",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entities.Spirit"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Spirit"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/daemon/users/login": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "daemon"
+                ],
+                "summary": "登录精灵系统",
+                "responses": {
+                    "200": {
+                        "description": "登录用户",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.User"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/graphql": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "graphql"
+                ],
+                "summary": "graphql查询",
+                "parameters": [
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.GraphqlReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/e.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/graphql/user": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "graphql"
+                ],
+                "summary": "用户graphql查询",
+                "parameters": [
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.GraphqlReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/e.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/rewards": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "awards"
+                ],
+                "summary": "发送奖励",
+                "parameters": [
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/rpcdto.SendRewardsReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/e.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/tasks": {
+            "get": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "获取任务",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "a,b,c",
+                        "description": "联表",
+                        "name": "joins",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "example": 1,
+                        "description": "第几页, 1开始",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "example": "query={}",
+                        "description": "查询语句",
+                        "name": "query",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 100,
+                        "example": 100,
+                        "description": "一页返回多少行数据",
+                        "name": "size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "id desc",
+                        "example": "id desc",
+                        "description": "排序规则",
+                        "name": "sort",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/entities.Task"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "创建任务",
+                "parameters": [
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entities.Task"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Task"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/tasks/event": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "投递任务事件",
+                "parameters": [
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/dto.EventDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/e.Response"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/tasks/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "获取单个任务",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Task"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "完整更新单个任务",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entities.Task"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Task"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "删除单个任务",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Task"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "局部更新单个任务",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "请求结构",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entities.Task"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.Task"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/user-tasks": {
+            "get": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "批量获取用户任务",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "a,b,c",
+                        "description": "联表",
+                        "name": "joins",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 1,
+                        "example": 1,
+                        "description": "第几页, 1开始",
+                        "name": "page",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "example": "query={}",
+                        "description": "查询语句",
+                        "name": "query",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "default": 100,
+                        "example": 100,
+                        "description": "一页返回多少行数据",
+                        "name": "size",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "default": "id desc",
+                        "example": "id desc",
+                        "description": "排序规则",
+                        "name": "sort",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/definitions/entities.UserTask"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/user-tasks/draw/{id}": {
+            "post": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "领取任务奖励",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/dto.DrawRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/user-tasks/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "TokenAuth": []
+                    }
+                ],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "tasks"
+                ],
+                "summary": "获得某个ID的用户任务",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "allOf": [
+                                {
+                                    "$ref": "#/definitions/e.Response"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "$ref": "#/definitions/entities.UserTask"
+                                        }
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "dto.ClickResult": {
+            "type": "object",
+            "properties": {
+                "rewards": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg.Reward"
+                    }
+                },
+                "user": {
+                    "$ref": "#/definitions/entities.User"
+                },
+                "userSpirit": {
+                    "$ref": "#/definitions/entities.UserSpirit"
+                }
+            }
+        },
+        "dto.DrawRes": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "code码, OK为成功",
+                    "type": "string"
+                },
+                "data": {
+                    "type": "object",
+                    "properties": {
+                        "rewards": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/pkg.Reward"
+                            }
+                        },
+                        "userTask": {
+                            "$ref": "#/definitions/entities.UserTask"
+                        }
+                    }
+                },
+                "error": {
+                    "description": "返回内部错误",
+                    "type": "string"
+                },
+                "msg": {
+                    "description": "返回消息",
+                    "type": "string"
+                },
+                "now": {
+                    "description": "服务器时间戳",
+                    "type": "integer"
+                },
+                "region": {
+                    "description": "服务所在区域",
+                    "type": "string"
+                }
+            }
+        },
+        "dto.EventDto": {
+            "type": "object",
+            "required": [
+                "event",
+                "gid"
+            ],
+            "properties": {
+                "event": {
+                    "description": "事件名",
+                    "type": "string",
+                    "enum": [
+                        "onLogin",
+                        "shop:buy",
+                        "goods:drawer",
+                        "goods:guess",
+                        "useShowCard",
+                        "useTipCard"
+                    ]
+                },
+                "gid": {
+                    "description": "全局用户Id",
+                    "type": "string"
+                },
+                "params": {
+                    "description": "附加参数",
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "progress": {
+                    "description": "进度",
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.GraphqlReq": {
+            "type": "object",
+            "required": [
+                "query"
+            ],
+            "properties": {
+                "cache": {
+                    "description": "缓存多少秒,0为不走缓存",
+                    "type": "integer",
+                    "example": 0
+                },
+                "query": {
+                    "description": "查询语句",
+                    "type": "string"
+                },
+                "vars": {
+                    "description": "查询变量",
+                    "type": "object"
+                }
+            }
+        },
+        "dto.ReplaceGuardianReq": {
+            "type": "object",
+            "required": [
+                "id",
+                "index"
+            ],
+            "properties": {
+                "id": {
+                    "description": "用户精灵Id",
+                    "type": "integer"
+                },
+                "index": {
+                    "description": "站位索引",
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.TransformMultipleReq": {
+            "type": "object",
+            "required": [
+                "gid",
+                "properties"
+            ],
+            "properties": {
+                "gid": {
+                    "description": "全局用户Id",
+                    "type": "string"
+                },
+                "properties": {
+                    "description": "要转换的属性比如 lucky",
+                    "type": "object"
+                }
+            }
+        },
+        "dto.TransformReq": {
+            "type": "object",
+            "required": [
+                "gid",
+                "property",
+                "value"
+            ],
+            "properties": {
+                "gid": {
+                    "description": "全局用户Id",
+                    "type": "string"
+                },
+                "property": {
+                    "description": "要转换的属性比如 lucky",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "基础转化值",
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.UpResult": {
+            "type": "object",
+            "properties": {
+                "newUserSpirit": {
+                    "$ref": "#/definitions/entities.UserSpirit"
+                },
+                "oldUserSpirit": {
+                    "$ref": "#/definitions/entities.UserSpirit"
+                }
+            }
+        },
+        "dto.UseResult": {
+            "type": "object",
+            "properties": {
+                "reply": {
+                    "type": "object"
+                },
+                "rewards": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg.Reward"
+                    }
+                }
+            }
+        },
+        "e.Response": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "code码, OK为成功",
+                    "type": "string"
+                },
+                "data": {
+                    "description": "返回数据",
+                    "type": "object"
+                },
+                "error": {
+                    "description": "返回内部错误",
+                    "type": "string"
+                },
+                "msg": {
+                    "description": "返回消息",
+                    "type": "string"
+                },
+                "now": {
+                    "description": "服务器时间戳",
+                    "type": "integer"
+                },
+                "region": {
+                    "description": "服务所在区域",
+                    "type": "string"
+                }
+            }
+        },
+        "entities.Capsule": {
+            "type": "object",
+            "required": [
+                "rewards"
+            ],
+            "properties": {
+                "description": {
+                    "description": "扭蛋描述",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "扭蛋名称",
+                    "type": "string"
+                },
+                "rewards": {
+                    "description": "扭蛋奖励配置",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg.WeightReward"
+                    }
+                }
+            }
+        },
+        "entities.Category": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "alias": {
+                    "description": "分类别名(全局唯一)",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "分类Icon",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "分类显示名(全局唯一)",
+                    "type": "string"
+                }
+            }
+        },
+        "entities.EntrustReward": {
+            "type": "object",
+            "required": [
+                "count",
+                "type",
+                "uuid"
+            ],
+            "properties": {
+                "count": {
+                    "description": "给予数量",
+                    "type": "integer"
+                },
+                "desc": {
+                    "description": "奖励描述",
+                    "type": "string"
+                },
+                "draw": {
+                    "type": "boolean"
+                },
+                "extra": {
+                    "description": "扩展字段",
+                    "type": "object"
+                },
+                "id": {
+                    "description": "奖励相关Id",
+                    "type": "integer"
+                },
+                "type": {
+                    "description": "奖励类型 toy: 玩具, fixed_coupon: 定额优惠券, free_postage_coupon: 免邮优惠券, open_tool_coupon: 显示卡, extra_tip_coupon: 提示卡, lucky: 幸运值, no_limit_max_lucky: 无上限幸运值, sprite: 旧版守护精灵, buy_qualification: 购买权, unfixed_coupon: 不定额优惠券, daemon_spirit: 守护精灵 - 精灵, daemon_exp: 守护精灵 - 经验值, daemon_grid: 守护精灵 - 格子, daemon_capsule: 守护精灵 - 扭蛋",
+                    "type": "string",
+                    "enum": [
+                        "toy",
+                        "fixed_coupon",
+                        "free_postage_coupon",
+                        "open_tool_coupon",
+                        "extra_tip_coupon",
+                        "lucky",
+                        "no_limit_max_lucky",
+                        "sprite",
+                        "buy_qualification",
+                        "unfixed_coupon",
+                        "daemon_spirit",
+                        "daemon_exp",
+                        "daemon_grid",
+                        "daemon_capsule"
+                    ]
+                },
+                "uuid": {
+                    "description": "奖励唯一Id",
+                    "type": "string"
+                }
+            }
+        },
+        "entities.Spirit": {
+            "type": "object",
+            "required": [
+                "clickRewards",
+                "entrustRewards",
+                "passiveProperty"
+            ],
+            "properties": {
+                "alias": {
+                    "description": "精灵别名",
+                    "type": "string"
+                },
+                "canTrade": {
+                    "description": "是否可交易",
+                    "type": "boolean"
+                },
+                "categoryId": {
+                    "type": "number"
+                },
+                "clickRewards": {
+                    "description": "点击奖励配置",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg.WeightReward"
+                    }
+                },
+                "comboSkillDesc": {
+                    "description": "羁绊技能描述",
+                    "type": "string"
+                },
+                "enabled": {
+                    "description": "是否可用",
+                    "type": "boolean"
+                },
+                "entrustInterval": {
+                    "description": "托管间隔",
+                    "type": "integer"
+                },
+                "entrustIntervalUnit": {
+                    "description": "托管间隔单位 minutes: 分钟 hours: 小时",
+                    "type": "string",
+                    "enum": [
+                        "minutes",
+                        "hours"
+                    ]
+                },
+                "entrustRewards": {
+                    "description": "托管奖励配置",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg.WeightReward"
+                    }
+                },
+                "entrustSkillDesc": {
+                    "description": "托管技能描述",
+                    "type": "string"
+                },
+                "entrustWeightAdd": {
+                    "description": "托管附加权重",
+                    "type": "integer"
+                },
+                "exps": {
+                    "description": "经验值列表",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "name": {
+                    "description": "精灵名称",
+                    "type": "string"
+                },
+                "passiveBase": {
+                    "description": "被动技能基础加成",
+                    "type": "number"
+                },
+                "passiveExpr": {
+                    "description": "被动技能加成表达式 value: 传进来的值 base: 基础加成 level: 精灵当前等级 append: 等级加成",
+                    "type": "string",
+                    "default": "base * value + append * level",
+                    "example": "base * value + append * level"
+                },
+                "passiveLevelAppend": {
+                    "description": "被动技能附加加成",
+                    "type": "number"
+                },
+                "passiveProperty": {
+                    "description": "被动技能属性",
+                    "type": "string",
+                    "enum": [
+                        "lucky"
+                    ]
+                },
+                "passiveSkillDesc": {
+                    "description": "被动技能描述",
+                    "type": "string"
+                },
+                "resources": {
+                    "description": "自定义资源",
+                    "type": "object"
+                }
+            }
+        },
+        "entities.Task": {
+            "type": "object",
+            "required": [
+                "cycle",
+                "event",
+                "rewards",
+                "scene",
+                "target",
+                "title"
+            ],
+            "properties": {
+                "alias": {
+                    "description": "任务别名,唯一键",
+                    "type": "string"
+                },
+                "beginDate": {
+                    "description": "任务有效期开始时间",
+                    "type": "string",
+                    "example": "2018-09-22T12:42:31+08:00"
+                },
+                "bigTab": {
+                    "description": "预设大Tab分类",
+                    "type": "string",
+                    "example": "default"
+                },
+                "counterType": {
+                    "description": "计数类型 0: 递增 1: 按进度增加 2: 新进度覆盖旧进度",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1,
+                        2
+                    ],
+                    "example": 0
+                },
+                "cycle": {
+                    "description": "任务周期 none: 无 day: 日任务 week: 周任务 month: 月任务",
+                    "type": "string",
+                    "enum": [
+                        "none",
+                        "days",
+                        "weeks",
+                        "months"
+                    ]
+                },
+                "desc": {
+                    "description": "任务描述",
+                    "type": "string"
+                },
+                "drawType": {
+                    "description": "领取方式 0: 手动领取 1: 自动领取",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ],
+                    "example": 0
+                },
+                "enabled": {
+                    "description": "是否可用",
+                    "type": "boolean"
+                },
+                "endDate": {
+                    "description": "任务有效期结束时间",
+                    "type": "string",
+                    "example": "2018-09-22T12:42:31+08:00"
+                },
+                "event": {
+                    "description": "事件名",
+                    "type": "string",
+                    "enum": [
+                        "onLogin",
+                        "shop:buy",
+                        "goods:drawer",
+                        "goods:guess",
+                        "useShowCard",
+                        "useTipCard"
+                    ]
+                },
+                "eventType": {
+                    "description": "事件类型 0: 一次性任务 1: 阶段任务",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1
+                    ],
+                    "example": 0
+                },
+                "extra": {
+                    "description": "任务扩展字段",
+                    "type": "object"
+                },
+                "filterEval": {
+                    "description": "过滤表达式",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "任务Icon",
+                    "type": "string"
+                },
+                "internalDesc": {
+                    "description": "运营内部描述",
+                    "type": "string"
+                },
+                "linkButton": {
+                    "description": "任务按钮描述",
+                    "type": "string"
+                },
+                "linkUrl": {
+                    "description": "按钮跳转链接",
+                    "type": "string"
+                },
+                "loopLimit": {
+                    "description": "当循环模式为循环有上限时的上限值",
+                    "type": "integer",
+                    "example": 0
+                },
+                "loopType": {
+                    "description": "循环模式 0: 无 1: 循环有上限 2: 循环无上限",
+                    "type": "integer",
+                    "enum": [
+                        0,
+                        1,
+                        2
+                    ],
+                    "example": 0
+                },
+                "preDoneCount": {
+                    "description": "前置任务完成数量,激活当前任务",
+                    "type": "integer",
+                    "example": 0
+                },
+                "preTasks": {
+                    "description": "前置任务列表",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "priority": {
+                    "description": "显示优先级",
+                    "type": "integer",
+                    "example": 0
+                },
+                "progressField": {
+                    "type": "string"
+                },
+                "progressSerial": {
+                    "description": "是否需要进度更新是连续的",
+                    "type": "boolean"
+                },
+                "rewardDesc": {
+                    "description": "奖励描述",
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "rewards": {
+                    "description": "奖励描述",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg.Reward"
+                    }
+                },
+                "scene": {
+                    "description": "场景(可以作为系统分类)",
+                    "type": "string"
+                },
+                "smallTab": {
+                    "description": "预设小Tab分类 场景 \u003e 大Tab \u003e 小Tab",
+                    "type": "string"
+                },
+                "stageTargets": {
+                    "description": "阶段目标",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "target": {
+                    "description": "任务目标 progress \u003e= target 完成任务",
+                    "type": "integer",
+                    "example": 10
+                },
+                "targetUnitDesc": {
+                    "description": "目标单位描述",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "任务标题",
+                    "type": "string"
+                },
+                "ttl": {
+                    "type": "string"
+                },
+                "weight": {
+                    "description": "任务权重",
+                    "type": "integer"
+                }
+            }
+        },
+        "entities.User": {
+            "type": "object",
+            "properties": {
+                "clickCount": {
+                    "description": "当天的点击数量",
+                    "type": "integer"
+                },
+                "clickLimit": {
+                    "description": "当天点击上限",
+                    "type": "integer"
+                },
+                "gid": {
+                    "description": "用户全局id",
+                    "type": "string"
+                },
+                "gridLimit": {
+                    "description": "站位限制",
+                    "type": "integer"
+                },
+                "loginAt": {
+                    "description": "上次登录时间 (每天更新一次)",
+                    "type": "string"
+                },
+                "sceneId": {
+                    "description": "场景Id(暂时无用)",
+                    "type": "integer"
+                },
+                "userCapsules": {
+                    "description": "用户扭蛋",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entities.UserCapsule"
+                    }
+                },
+                "userSpirits": {
+                    "description": "用户精灵",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entities.UserSpirit"
+                    }
+                }
+            }
+        },
+        "entities.UserCapsule": {
+            "type": "object",
+            "properties": {
+                "capsuleId": {
+                    "description": "扭蛋Id",
+                    "type": "integer"
+                },
+                "gid": {
+                    "description": "全局用户id",
+                    "type": "string"
+                },
+                "user": {
+                    "description": "用户id",
+                    "type": "integer"
+                }
+            }
+        },
+        "entities.UserSpirit": {
+            "type": "object",
+            "required": [
+                "entrustRewards"
+            ],
+            "properties": {
+                "code": {
+                    "description": "精灵的cdkey",
+                    "type": "string"
+                },
+                "entrustAt": {
+                    "description": "托管时间",
+                    "type": "string"
+                },
+                "entrustInterval": {
+                    "description": "托管间隔",
+                    "type": "integer"
+                },
+                "entrustRewards": {
+                    "description": "托管奖励",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/entities.EntrustReward"
+                    }
+                },
+                "entrustState": {
+                    "description": "托管状态",
+                    "type": "boolean"
+                },
+                "exp": {
+                    "description": "经验值",
+                    "type": "integer"
+                },
+                "gid": {
+                    "description": "全局用户Id",
+                    "type": "string"
+                },
+                "index": {
+                    "description": "精灵站位 null: 无站位 0: 主位 0以上: 守护位",
+                    "type": "number"
+                },
+                "isNew": {
+                    "type": "boolean"
+                },
+                "level": {
+                    "description": "等级",
+                    "type": "integer"
+                },
+                "spiritId": {
+                    "description": "精灵Id",
+                    "type": "integer"
+                },
+                "totalExp": {
+                    "description": "总经验值",
+                    "type": "integer"
+                },
+                "tradeState": {
+                    "description": "交易状态",
+                    "type": "boolean"
+                },
+                "userId": {
+                    "description": "用户Id",
+                    "type": "integer"
+                }
+            }
+        },
+        "entities.UserTask": {
+            "type": "object",
+            "properties": {
+                "done": {
+                    "description": "是否已完成",
+                    "type": "boolean"
+                },
+                "doneAt": {
+                    "description": "任务完成时间",
+                    "type": "string"
+                },
+                "doneCount": {
+                    "description": "任务完成次数",
+                    "type": "integer"
+                },
+                "draw": {
+                    "description": "是否已领取",
+                    "type": "boolean"
+                },
+                "drawIndexes": {
+                    "description": "领取任务奖励的索引",
+                    "type": "array",
+                    "items": {
+                        "type": "number"
+                    }
+                },
+                "gid": {
+                    "description": "全局用户Id",
+                    "type": "string"
+                },
+                "loopCount": {
+                    "description": "循环完成次数",
+                    "type": "integer"
+                },
+                "progress": {
+                    "description": "任务进度",
+                    "type": "integer"
+                },
+                "progressAt": {
+                    "description": "任务更新进度的时间",
+                    "type": "string"
+                },
+                "taskId": {
+                    "description": "任务Id",
+                    "type": "integer"
+                }
+            }
+        },
+        "pkg.Reward": {
+            "type": "object",
+            "required": [
+                "count",
+                "type",
+                "uuid"
+            ],
+            "properties": {
+                "count": {
+                    "description": "给予数量",
+                    "type": "integer"
+                },
+                "desc": {
+                    "description": "奖励描述",
+                    "type": "string"
+                },
+                "extra": {
+                    "description": "扩展字段",
+                    "type": "object"
+                },
+                "id": {
+                    "description": "奖励相关Id",
+                    "type": "integer"
+                },
+                "type": {
+                    "description": "奖励类型 toy: 玩具, fixed_coupon: 定额优惠券, free_postage_coupon: 免邮优惠券, open_tool_coupon: 显示卡, extra_tip_coupon: 提示卡, lucky: 幸运值, no_limit_max_lucky: 无上限幸运值, sprite: 旧版守护精灵, buy_qualification: 购买权, unfixed_coupon: 不定额优惠券, daemon_spirit: 守护精灵 - 精灵, daemon_exp: 守护精灵 - 经验值, daemon_grid: 守护精灵 - 格子, daemon_capsule: 守护精灵 - 扭蛋",
+                    "type": "string",
+                    "enum": [
+                        "toy",
+                        "fixed_coupon",
+                        "free_postage_coupon",
+                        "open_tool_coupon",
+                        "extra_tip_coupon",
+                        "lucky",
+                        "no_limit_max_lucky",
+                        "sprite",
+                        "buy_qualification",
+                        "unfixed_coupon",
+                        "daemon_spirit",
+                        "daemon_exp",
+                        "daemon_grid",
+                        "daemon_capsule"
+                    ]
+                },
+                "uuid": {
+                    "description": "奖励唯一Id",
+                    "type": "string"
+                }
+            }
+        },
+        "pkg.WeightReward": {
+            "type": "object",
+            "required": [
+                "reward",
+                "weight"
+            ],
+            "properties": {
+                "canAddWeight": {
+                    "description": "是否增加权重",
+                    "type": "boolean"
+                },
+                "reward": {
+                    "description": "奖励描述",
+                    "$ref": "#/definitions/pkg.Reward"
+                },
+                "weight": {
+                    "description": "权重",
+                    "type": "integer"
+                }
+            }
+        },
+        "rpcdto.SendRewardsReq": {
+            "type": "object",
+            "required": [
+                "gid",
+                "module",
+                "origin",
+                "reason",
+                "rewards",
+                "service"
+            ],
+            "properties": {
+                "gid": {
+                    "description": "全局用户Id",
+                    "type": "string",
+                    "example": "xxx"
+                },
+                "module": {
+                    "description": "来自哪个模块",
+                    "type": "string",
+                    "example": "task"
+                },
+                "origin": {
+                    "description": "微服务来源",
+                    "type": "string",
+                    "example": "operation"
+                },
+                "reason": {
+                    "description": "什么原因",
+                    "type": "string",
+                    "example": "draw"
+                },
+                "rewards": {
+                    "description": "奖励信息",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/pkg.Reward"
+                    }
+                },
+                "service": {
+                    "description": "来自哪个服务",
+                    "type": "string",
+                    "example": "task"
+                }
+            }
+        }
+    },
+    "securityDefinitions": {
+        "TokenAuth": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    },
+    "tags": [
+        {
+            "description": "发奖中心",
+            "name": "awards"
+        },
+        {
+            "description": "任务系统",
+            "name": "tasks"
+        },
+        {
+            "description": "graphql查询",
+            "name": "graphql"
+        },
+        {
+            "description": "守护精灵",
+            "name": "daemon"
+        }
+    ]
+}

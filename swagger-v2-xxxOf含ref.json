@@ -1,0 +1,1729 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "SingleMall API",
+        "description": "Test description",
+        "version": "v1"
+    },
+    "host": "127.0.0.1:8000",
+    "schemes": ["http"],
+    "basePath": "/api",
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "securityDefinitions": {
+        "Basic": {
+            "type": "basic"
+        }
+    },
+    "security": [{
+        "Basic": []
+    }],
+    "paths": {
+        "/addresses/": {
+            "get": {
+                "operationId": "addresses_list",
+                "summary": "\u67e5\u8be2\u591a\u4e2a\u5730\u5740",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "field1": {
+                                    "anyOf": [{
+                                            "$ref": "#/definitions/Login"
+                                        },
+                                        {
+                                            "$ref": "#/definitions/Register"
+                                        }
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "field1"
+                            ]
+                        }
+                    }
+                },
+                "tags": ["addresses"]
+            },
+            "post": {
+                "operationId": "addresses_create",
+                "summary": "\u6dfb\u52a0\u5730\u5740",
+                "description": "",
+                "parameters": [{
+                    "name": "data",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/Address"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Address"
+                        }
+                    }
+                },
+                "tags": ["addresses"]
+            },
+            "parameters": []
+        },
+        "/addresses/{id}": {
+            "get": {
+                "operationId": "addresses_read",
+                "summary": "\u67e5\u8be2\u5355\u4e2a\u5730\u5740",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Address"
+                        }
+                    }
+                },
+                "tags": ["addresses"]
+            },
+            "put": {
+                "operationId": "addresses_update",
+                "summary": "\u66f4\u65b0\u5730\u5740",
+                "description": "",
+                "parameters": [{
+                    "name": "data",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/Address"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Address"
+                        }
+                    }
+                },
+                "tags": ["addresses"]
+            },
+            "patch": {
+                "operationId": "addresses_partial_update",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": ""
+                    }
+                },
+                "tags": ["addresses"]
+            },
+            "delete": {
+                "operationId": "addresses_delete",
+                "summary": "\u5220\u9664\u5730\u5740",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "tags": ["addresses"]
+            },
+            "parameters": [{
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "type": "string"
+            }]
+        },
+        "/auth/login/": {
+            "post": {
+                "operationId": "auth_login_create",
+                "summary": "\u767b\u5f55",
+                "description": "",
+                "parameters": [{
+                    "name": "data",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/Login"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "token string"
+                    }
+                },
+                "tags": ["auth"]
+            },
+            "parameters": []
+        },
+        "/auth/logout/": {
+            "post": {
+                "operationId": "auth_logout_create",
+                "summary": "\u767b\u51fa",
+                "description": "",
+                "parameters": [],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                },
+                "tags": ["auth"]
+            },
+            "parameters": []
+        },
+        "/auth/register/": {
+            "post": {
+                "operationId": "auth_register_create",
+                "summary": "\u6ce8\u518c",
+                "description": "\u624b\u673a\u53f7\u5bc6\u7801\u76f4\u63a5\u6ce8\u518c",
+                "parameters": [{
+                    "name": "data",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/Register"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Register"
+                        }
+                    }
+                },
+                "tags": ["auth"]
+            },
+            "parameters": []
+        },
+        "/balance_detail/": {
+            "get": {
+                "operationId": "balance_detail_list",
+                "summary": "\u67e5\u8be2\u8d44\u91d1\u660e\u7ec6",
+                "description": "",
+                "parameters": [{
+                    "name": "amount_type",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "page",
+                    "in": "query",
+                    "description": "PageNumber",
+                    "required": false,
+                    "type": "integer",
+                    "default": 1
+                }, {
+                    "name": "size",
+                    "in": "query",
+                    "description": "PageSize",
+                    "required": false,
+                    "type": "integer",
+                    "default": 50
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "required": ["results"],
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "next": {
+                                    "description": "null\u5219\u65e0\u4e0b\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "previous": {
+                                    "description": "null\u5219\u65e0\u4e0a\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/BalanceDetail"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["balance_detail"]
+            },
+            "parameters": []
+        },
+        "/collects/": {
+            "get": {
+                "operationId": "collects_list",
+                "summary": "\u67e5\u8be2\u4f18\u60e0\u5238",
+                "description": "",
+                "parameters": [{
+                    "name": "status",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "page",
+                    "in": "query",
+                    "description": "PageNumber",
+                    "required": false,
+                    "type": "integer",
+                    "default": 1
+                }, {
+                    "name": "size",
+                    "in": "query",
+                    "description": "PageSize",
+                    "required": false,
+                    "type": "integer",
+                    "default": 50
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "required": ["results"],
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "next": {
+                                    "description": "null\u5219\u65e0\u4e0b\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "previous": {
+                                    "description": "null\u5219\u65e0\u4e0a\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Coupon"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["collects"]
+            },
+            "parameters": []
+        },
+        "/coupons/": {
+            "get": {
+                "operationId": "coupons_list",
+                "summary": "\u67e5\u8be2\u4f18\u60e0\u5238",
+                "description": "",
+                "parameters": [{
+                    "name": "status",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "page",
+                    "in": "query",
+                    "description": "PageNumber",
+                    "required": false,
+                    "type": "integer",
+                    "default": 1
+                }, {
+                    "name": "size",
+                    "in": "query",
+                    "description": "PageSize",
+                    "required": false,
+                    "type": "integer",
+                    "default": 50
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "required": ["results"],
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "next": {
+                                    "description": "null\u5219\u65e0\u4e0b\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "previous": {
+                                    "description": "null\u5219\u65e0\u4e0a\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Coupon"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["coupons"]
+            },
+            "parameters": []
+        },
+        "/evaluations/": {
+            "get": {
+                "operationId": "evaluations_list",
+                "summary": "\u67e5\u8be2\u5546\u54c1\u8bc4\u4ef7",
+                "description": "",
+                "parameters": [{
+                    "name": "goods_spu",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "username",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "page",
+                    "in": "query",
+                    "description": "PageNumber",
+                    "required": false,
+                    "type": "integer",
+                    "default": 1
+                }, {
+                    "name": "size",
+                    "in": "query",
+                    "description": "PageSize",
+                    "required": false,
+                    "type": "integer",
+                    "default": 50
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "required": ["results"],
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "next": {
+                                    "description": "null\u5219\u65e0\u4e0b\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "previous": {
+                                    "description": "null\u5219\u65e0\u4e0a\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Evaluation"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["evaluations"]
+            },
+            "parameters": []
+        },
+        "/feedback/": {
+            "post": {
+                "operationId": "feedback_create",
+                "summary": "\u63d0\u4ea4\u53cd\u9988",
+                "description": "",
+                "parameters": [{
+                    "name": "data",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/Feedback"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Feedback"
+                        }
+                    }
+                },
+                "tags": ["feedback"]
+            },
+            "parameters": []
+        },
+        "/goods_attr_values/": {
+            "get": {
+                "operationId": "goods_attr_values_list",
+                "summary": "\u67e5\u8be2\u5546\u54c1\u5c5e\u6027\u503c",
+                "description": "",
+                "parameters": [{
+                    "name": "goods_attr",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "page",
+                    "in": "query",
+                    "description": "PageNumber",
+                    "required": false,
+                    "type": "integer",
+                    "default": 1
+                }, {
+                    "name": "size",
+                    "in": "query",
+                    "description": "PageSize",
+                    "required": false,
+                    "type": "integer",
+                    "default": 50
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "required": ["results"],
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "next": {
+                                    "description": "null\u5219\u65e0\u4e0b\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "previous": {
+                                    "description": "null\u5219\u65e0\u4e0a\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/GoodsAttrValue"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["goods_attr_values"]
+            },
+            "parameters": []
+        },
+        "/goods_attrs/": {
+            "get": {
+                "operationId": "goods_attrs_list",
+                "summary": "\u67e5\u8be2\u5546\u54c1\u5c5e\u6027",
+                "description": "",
+                "parameters": [{
+                    "name": "goods_spu",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "page",
+                    "in": "query",
+                    "description": "PageNumber",
+                    "required": false,
+                    "type": "integer",
+                    "default": 1
+                }, {
+                    "name": "size",
+                    "in": "query",
+                    "description": "PageSize",
+                    "required": false,
+                    "type": "integer",
+                    "default": 50
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "required": ["results"],
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "next": {
+                                    "description": "null\u5219\u65e0\u4e0b\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "previous": {
+                                    "description": "null\u5219\u65e0\u4e0a\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/GoodsAttr"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["goods_attrs"]
+            },
+            "parameters": []
+        },
+        "/goods_categories/": {
+            "get": {
+                "operationId": "goods_categories_list",
+                "summary": "\u67e5\u8be2\u5546\u54c1\u5206\u7c7b",
+                "description": "",
+                "parameters": [{
+                    "name": "status",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "page",
+                    "in": "query",
+                    "description": "PageNumber",
+                    "required": false,
+                    "type": "integer",
+                    "default": 1
+                }, {
+                    "name": "size",
+                    "in": "query",
+                    "description": "PageSize",
+                    "required": false,
+                    "type": "integer",
+                    "default": 50
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "required": ["results"],
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "next": {
+                                    "description": "null\u5219\u65e0\u4e0b\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "previous": {
+                                    "description": "null\u5219\u65e0\u4e0a\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/GoodsCategory"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["goods_categories"]
+            },
+            "parameters": []
+        },
+        "/goods_skus/": {
+            "get": {
+                "operationId": "goods_skus_list",
+                "summary": "\u67e5\u8be2\u5546\u54c1\u89c4\u683c",
+                "description": "",
+                "parameters": [{
+                    "name": "goods_spu",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "page",
+                    "in": "query",
+                    "description": "PageNumber",
+                    "required": false,
+                    "type": "integer",
+                    "default": 1
+                }, {
+                    "name": "size",
+                    "in": "query",
+                    "description": "PageSize",
+                    "required": false,
+                    "type": "integer",
+                    "default": 50
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "required": ["results"],
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "next": {
+                                    "description": "null\u5219\u65e0\u4e0b\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "previous": {
+                                    "description": "null\u5219\u65e0\u4e0a\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/GoodsSku"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["goods_skus"]
+            },
+            "parameters": []
+        },
+        "/goods_spus/": {
+            "get": {
+                "operationId": "goods_spus_list",
+                "summary": "\u67e5\u8be2\u5546\u54c1",
+                "description": "",
+                "parameters": [{
+                    "name": "category",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "status",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "page",
+                    "in": "query",
+                    "description": "PageNumber",
+                    "required": false,
+                    "type": "integer",
+                    "default": 1
+                }, {
+                    "name": "size",
+                    "in": "query",
+                    "description": "PageSize",
+                    "required": false,
+                    "type": "integer",
+                    "default": 50
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "required": ["results"],
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "next": {
+                                    "description": "null\u5219\u65e0\u4e0b\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "previous": {
+                                    "description": "null\u5219\u65e0\u4e0a\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/GoodsSpu"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["goods_spus"]
+            },
+            "parameters": []
+        },
+        "/messages/": {
+            "get": {
+                "operationId": "messages_list",
+                "summary": "\u67e5\u8be2\u901a\u77e5\u6d88\u606f",
+                "description": "",
+                "parameters": [{
+                    "name": "page",
+                    "in": "query",
+                    "description": "PageNumber",
+                    "required": false,
+                    "type": "integer",
+                    "default": 1
+                }, {
+                    "name": "size",
+                    "in": "query",
+                    "description": "PageSize",
+                    "required": false,
+                    "type": "integer",
+                    "default": 50
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "required": ["results"],
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "next": {
+                                    "description": "null\u5219\u65e0\u4e0b\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "previous": {
+                                    "description": "null\u5219\u65e0\u4e0a\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Message"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["messages"]
+            },
+            "post": {
+                "operationId": "messages_create",
+                "description": "",
+                "parameters": [{
+                    "name": "data",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/Message"
+                    }
+                }],
+                "responses": {
+                    "201": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Message"
+                        }
+                    }
+                },
+                "tags": ["messages"]
+            },
+            "parameters": []
+        },
+        "/order_goods/": {
+            "get": {
+                "operationId": "order_goods_list",
+                "summary": "\u67e5\u8be2\u8ba2\u5355\u5546\u54c1",
+                "description": "",
+                "parameters": [{
+                    "name": "order",
+                    "in": "query",
+                    "description": "",
+                    "required": false,
+                    "type": "string"
+                }, {
+                    "name": "page",
+                    "in": "query",
+                    "description": "PageNumber",
+                    "required": false,
+                    "type": "integer",
+                    "default": 1
+                }, {
+                    "name": "size",
+                    "in": "query",
+                    "description": "PageSize",
+                    "required": false,
+                    "type": "integer",
+                    "default": 50
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "required": ["results"],
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "next": {
+                                    "description": "null\u5219\u65e0\u4e0b\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "previous": {
+                                    "description": "null\u5219\u65e0\u4e0a\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/OrderGoods"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["order_goods"]
+            },
+            "parameters": []
+        },
+        "/orders/": {
+            "get": {
+                "operationId": "orders_list",
+                "summary": "\u67e5\u8be2\u8ba2\u5355",
+                "description": "",
+                "parameters": [{
+                    "name": "page",
+                    "in": "query",
+                    "description": "PageNumber",
+                    "required": false,
+                    "type": "integer",
+                    "default": 1
+                }, {
+                    "name": "size",
+                    "in": "query",
+                    "description": "PageSize",
+                    "required": false,
+                    "type": "integer",
+                    "default": 50
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "required": ["results"],
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "next": {
+                                    "description": "null\u5219\u65e0\u4e0b\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "previous": {
+                                    "description": "null\u5219\u65e0\u4e0a\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Order"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["orders"]
+            },
+            "post": {
+                "operationId": "orders_create",
+                "summary": "\u521b\u5efa\u8ba2\u5355 \u5f85\u5b8c\u6210",
+                "description": "",
+                "parameters": [{
+                    "name": "data",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/Order"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Order"
+                            }
+                        }
+                    }
+                },
+                "tags": ["orders"]
+            },
+            "parameters": []
+        },
+        "/recommends/": {
+            "get": {
+                "operationId": "recommends_list",
+                "summary": "\u67e5\u8be2\u63a8\u8350\u5546\u54c1",
+                "description": "",
+                "parameters": [{
+                    "name": "page",
+                    "in": "query",
+                    "description": "PageNumber",
+                    "required": false,
+                    "type": "integer",
+                    "default": 1
+                }, {
+                    "name": "size",
+                    "in": "query",
+                    "description": "PageSize",
+                    "required": false,
+                    "type": "integer",
+                    "default": 50
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "required": ["results"],
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "next": {
+                                    "description": "null\u5219\u65e0\u4e0b\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "previous": {
+                                    "description": "null\u5219\u65e0\u4e0a\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Recommend"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["recommends"]
+            },
+            "parameters": []
+        },
+        "/refunds/": {
+            "get": {
+                "operationId": "refunds_list",
+                "summary": "\u67e5\u8be2\u9000\u6b3e\u8bb0\u5f55",
+                "description": "",
+                "parameters": [{
+                    "name": "page",
+                    "in": "query",
+                    "description": "PageNumber",
+                    "required": false,
+                    "type": "integer",
+                    "default": 1
+                }, {
+                    "name": "size",
+                    "in": "query",
+                    "description": "PageSize",
+                    "required": false,
+                    "type": "integer",
+                    "default": 50
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "required": ["results"],
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "next": {
+                                    "description": "null\u5219\u65e0\u4e0b\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "previous": {
+                                    "description": "null\u5219\u65e0\u4e0a\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Refund"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["refunds"]
+            },
+            "post": {
+                "operationId": "refunds_create",
+                "summary": "\u521b\u5efa\u9000\u6b3e\u8bb0\u5f55 \u5f85\u5b8c\u6210",
+                "description": "",
+                "parameters": [{
+                    "name": "data",
+                    "in": "body",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/Refund"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/definitions/Refund"
+                        }
+                    }
+                },
+                "tags": ["refunds"]
+            },
+            "parameters": []
+        },
+        "/user_coupons/": {
+            "get": {
+                "operationId": "user_coupons_list",
+                "summary": "\u67e5\u8be2\u7528\u6237\u4f18\u60e0\u5238",
+                "description": "",
+                "parameters": [{
+                    "name": "page",
+                    "in": "query",
+                    "description": "PageNumber",
+                    "required": false,
+                    "type": "integer",
+                    "default": 1
+                }, {
+                    "name": "size",
+                    "in": "query",
+                    "description": "PageSize",
+                    "required": false,
+                    "type": "integer",
+                    "default": 50
+                }],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "schema": {
+                            "required": ["results"],
+                            "type": "object",
+                            "properties": {
+                                "count": {
+                                    "type": "integer"
+                                },
+                                "next": {
+                                    "description": "null\u5219\u65e0\u4e0b\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "previous": {
+                                    "description": "null\u5219\u65e0\u4e0a\u4e00\u6761",
+                                    "type": "string"
+                                },
+                                "results": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/UserCoupon"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": ["user_coupons"]
+            },
+            "parameters": []
+        }
+    },
+    "definitions": {
+        "Address": {
+            "required": ["name", "phone", "detail"],
+            "type": "object",
+            "properties": {
+                "allOf": {
+                    "title": "ID",
+                    "allOf": [{
+                            "$ref": "#/definitions/Login"
+                        },
+                        {
+                            "$ref": "#/definitions/Register"
+                        }
+                    ]
+                },
+                "name": {
+                    "title": "\u6536\u8d27\u4eba",
+                    "type": "string",
+                    "maxLength": 64,
+                    "minLength": 1
+                },
+                "phone": {
+                    "title": "\u7535\u8bdd",
+                    "type": "string",
+                    "maxLength": 11,
+                    "minLength": 1
+                },
+                "detail": {
+                    "title": "\u8be6\u7ec6\u5730\u5740",
+                    "type": "string",
+                    "maxLength": 256,
+                    "minLength": 1
+                },
+                "is_default": {
+                    "title": "\u662f\u5426\u9ed8\u8ba4\u5730\u5740",
+                    "description": "0: \u9ed8\u8ba4 1: \u975e\u9ed8\u8ba4",
+                    "type": "string",
+                    "enum": ["0", "1"]
+                },
+                "t_create": {
+                    "title": "\u521b\u5efa\u65f6\u95f4",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "t_update": {
+                    "title": "\u66f4\u65b0\u65f6\u95f4",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                }
+            }
+        },
+        "Login": {
+            "required": ["phone", "password"],
+            "type": "object",
+            "properties": {
+                "phone": {
+                    "title": "Phone",
+                    "description": "\u624b\u673a\u53f7",
+                    "type": "string",
+                    "maxLength": 11,
+                    "minLength": 1
+                },
+                "password": {
+                    "title": "Password",
+                    "description": "\u5bc6\u7801",
+                    "type": "string",
+                    "maxLength": 16,
+                    "minLength": 1
+                }
+            }
+        },
+        "Register": {
+            "required": ["username", "phone", "password"],
+            "type": "object",
+            "properties": {
+                "username": {
+                    "title": "\u7528\u6237\u540d",
+                    "description": "\u5fc5\u586b\u3002150\u4e2a\u5b57\u7b26\u6216\u8005\u66f4\u5c11\u3002\u5305\u542b\u5b57\u6bcd\uff0c\u6570\u5b57\u548c\u4ec5\u6709\u7684@/./+/-/_\u7b26\u53f7\u3002",
+                    "type": "string",
+                    "pattern": "^[\\w.@+-]+$",
+                    "maxLength": 150,
+                    "minLength": 1
+                },
+                "phone": {
+                    "title": "\u624b\u673a\u53f7",
+                    "type": "string",
+                    "maxLength": 11,
+                    "minLength": 1
+                },
+                "password": {
+                    "title": "\u5bc6\u7801",
+                    "type": "string",
+                    "maxLength": 128,
+                    "minLength": 1
+                }
+            }
+        },
+        "BalanceDetail": {
+            "required": ["amount_type"],
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "title": "\u91d1\u989d",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                },
+                "amount_type": {
+                    "title": "\u7c7b\u578b",
+                    "description": "0: \u6d88\u8d39 1: \u5145\u503c",
+                    "type": "string",
+                    "enum": ["1", "0"]
+                },
+                "t_create": {
+                    "title": "\u521b\u5efa\u65f6\u95f4",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                }
+            }
+        },
+        "Coupon": {
+            "required": ["name", "c_type", "status", "t_begin", "t_end"],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "title": "\u540d\u79f0",
+                    "type": "string",
+                    "maxLength": 64,
+                    "minLength": 1
+                },
+                "threshold": {
+                    "title": "\u95e8\u69db\u91d1\u989d",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                },
+                "free_amount": {
+                    "title": "\u4f18\u60e0\u91d1\u989d",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                },
+                "publish_count": {
+                    "title": "\u53d1\u884c\u6570\u91cf",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                },
+                "left_count": {
+                    "title": "\u5269\u4f59\u6570\u91cf",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                },
+                "c_type": {
+                    "title": "\u4f18\u60e0\u5238\u7c7b\u578b",
+                    "description": "0: \u6ee1\u51cf\u5238 1\uff1a\u901a\u7528\u4ee3\u91d1\u5238",
+                    "type": "string",
+                    "enum": ["0", "1"]
+                },
+                "status": {
+                    "title": "\u4f18\u60e0\u5238\u72b6\u6001",
+                    "description": "0: \u4e0a\u67b6 1:\u4e0b\u67b6",
+                    "type": "string",
+                    "enum": ["0", "1"]
+                },
+                "t_begin": {
+                    "title": "\u751f\u6548\u65f6\u95f4",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "t_end": {
+                    "title": "\u5931\u6548\u65f6\u95f4",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "Evaluation": {
+            "required": ["goods_spu", "username"],
+            "type": "object",
+            "properties": {
+                "goods_spu": {
+                    "title": "\u5546\u54c1",
+                    "type": "integer"
+                },
+                "username": {
+                    "title": "\u7528\u6237\u540d",
+                    "type": "string",
+                    "maxLength": 32,
+                    "minLength": 1
+                },
+                "review_text": {
+                    "title": "\u8bc4\u8bba",
+                    "type": "string",
+                    "minLength": 1,
+                    "x-nullable": true
+                }
+            }
+        },
+        "Feedback": {
+            "required": ["content", "images"],
+            "type": "object",
+            "properties": {
+                "content": {
+                    "title": "\u53cd\u9988\u5185\u5bb9",
+                    "type": "string",
+                    "maxLength": 1024,
+                    "minLength": 1
+                },
+                "images": {
+                    "title": "\u9017\u53f7\u5206\u9694\u7684\u56fe\u7247urls",
+                    "type": "string",
+                    "maxLength": 1024,
+                    "minLength": 1
+                }
+            }
+        },
+        "GoodsAttrValue": {
+            "required": ["goods_attr", "attr_value"],
+            "type": "object",
+            "properties": {
+                "goods_attr": {
+                    "title": "\u5c5e\u6027\u540d\u79f0",
+                    "type": "integer"
+                },
+                "attr_value": {
+                    "title": "\u5c5e\u6027\u503c",
+                    "type": "string",
+                    "maxLength": 64,
+                    "minLength": 1
+                }
+            }
+        },
+        "GoodsAttr": {
+            "required": ["goods_spu", "attr"],
+            "type": "object",
+            "properties": {
+                "goods_spu": {
+                    "title": "\u5546\u54c1",
+                    "type": "integer"
+                },
+                "attr": {
+                    "title": "\u5c5e\u6027\u540d\u79f0",
+                    "type": "string",
+                    "maxLength": 64,
+                    "minLength": 1
+                }
+            }
+        },
+        "GoodsCategory": {
+            "required": ["name", "image_url"],
+            "type": "object",
+            "properties": {
+                "name": {
+                    "title": "\u540d\u79f0",
+                    "type": "string",
+                    "maxLength": 64,
+                    "minLength": 1
+                },
+                "status": {
+                    "title": "\u72b6\u6001",
+                    "type": "string",
+                    "enum": ["1", "0"]
+                },
+                "image_url": {
+                    "title": "\u56fe\u7247url",
+                    "type": "string",
+                    "maxLength": 256,
+                    "minLength": 1
+                }
+            }
+        },
+        "GoodsSku": {
+            "required": ["goods_spu", "name", "specs"],
+            "type": "object",
+            "properties": {
+                "goods_spu": {
+                    "title": "\u5546\u54c1",
+                    "type": "integer"
+                },
+                "name": {
+                    "title": "\u89c4\u683c\u540d\u79f0",
+                    "type": "string",
+                    "maxLength": 64,
+                    "minLength": 1
+                },
+                "specs": {
+                    "title": "\u89c4\u683c\u63cf\u8ff0",
+                    "description": "json \"[{k: xxx, v: xxx}, ...]\"",
+                    "type": "string",
+                    "maxLength": 256,
+                    "minLength": 1
+                },
+                "price": {
+                    "title": "\u4ef7\u683c",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                },
+                "stock": {
+                    "title": "\u5e93\u5b58",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                },
+                "sales": {
+                    "title": "\u9500\u91cf",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                }
+            }
+        },
+        "GoodsSpu": {
+            "required": ["category", "name", "cover_url", "detail_urls", "video_url", "status"],
+            "type": "object",
+            "properties": {
+                "category": {
+                    "title": "\u5546\u54c1\u5206\u7c7b",
+                    "type": "integer"
+                },
+                "name": {
+                    "title": "\u540d\u79f0",
+                    "type": "string",
+                    "maxLength": 64,
+                    "minLength": 1
+                },
+                "cover_url": {
+                    "title": "\u5c01\u9762\u56fe\u7247url",
+                    "type": "string",
+                    "maxLength": 256,
+                    "minLength": 1
+                },
+                "detail_urls": {
+                    "title": "\u8be6\u60c5\u56fe\u7247url\uff0c\u9017\u53f7\u5206\u9694\u591a\u4e2a\u56fe\u7247",
+                    "type": "string",
+                    "minLength": 1
+                },
+                "video_url": {
+                    "title": "\u89c6\u9891url",
+                    "type": "string",
+                    "maxLength": 256,
+                    "minLength": 1
+                },
+                "status": {
+                    "title": "\u5546\u54c1\u72b6\u6001",
+                    "type": "string",
+                    "enum": ["1", "0"]
+                }
+            }
+        },
+        "Message": {
+            "required": ["title", "content", "m_type"],
+            "type": "object",
+            "properties": {
+                "title": {
+                    "title": "\u6807\u9898",
+                    "type": "string",
+                    "maxLength": 64,
+                    "minLength": 1
+                },
+                "content": {
+                    "title": "\u5185\u5bb9",
+                    "type": "string",
+                    "maxLength": 1024,
+                    "minLength": 1
+                },
+                "m_type": {
+                    "title": "\u6d88\u606f\u7c7b\u578b",
+                    "description": "0:\u901a\u77e5 1:\u7269\u6d41 2:\u5ba2\u670d",
+                    "type": "string",
+                    "enum": ["0", "1", "2"]
+                },
+                "t_create": {
+                    "title": "\u521b\u5efa\u65f6\u95f4",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                }
+            }
+        },
+        "Order": {
+            "required": ["order_id", "status", "receiver", "phone", "address", "remarks"],
+            "type": "object",
+            "properties": {
+                "order_id": {
+                    "title": "\u8ba2\u5355\u7f16\u53f7",
+                    "type": "string",
+                    "maxLength": 32,
+                    "minLength": 1
+                },
+                "o_coupon_id": {
+                    "title": "O coupon id",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "status": {
+                    "title": "\u8ba2\u5355\u72b6\u6001",
+                    "description": "0:\u5f85\u4ed8\u6b3e 1:\u5f85\u53d1\u8d27 2:\u5f85\u6536\u8d27 3:\u5df2\u5b8c\u6210 4:\u5df2\u8bc4\u4ef7 5:\u9000\u6b3e\u7533\u8bf7 6:\u9000\u6b3e\u4e2d 7:\u9000\u6b3e\u5b8c\u6210",
+                    "type": "string",
+                    "enum": ["0", "1", "2", "3", "4", "5", "6", "7"]
+                },
+                "amount": {
+                    "title": "\u603b\u91d1\u989d",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                },
+                "delivery_fee": {
+                    "title": "\u8fd0\u8d39",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                },
+                "receiver": {
+                    "title": "\u6536\u8d27\u4eba",
+                    "type": "string",
+                    "maxLength": 64,
+                    "minLength": 1
+                },
+                "phone": {
+                    "title": "\u6536\u8d27\u4eba\u7535\u8bdd",
+                    "type": "string",
+                    "maxLength": 11,
+                    "minLength": 1
+                },
+                "address": {
+                    "title": "\u6536\u8d27\u5730\u5740",
+                    "type": "string",
+                    "maxLength": 1024,
+                    "minLength": 1
+                },
+                "remarks": {
+                    "title": "\u5907\u6ce8",
+                    "type": "string",
+                    "maxLength": 1024,
+                    "minLength": 1
+                },
+                "t_pay": {
+                    "title": "\u652f\u4ed8\u65f6\u95f4",
+                    "type": "string",
+                    "format": "date-time",
+                    "x-nullable": true
+                },
+                "t_create": {
+                    "title": "\u521b\u5efa\u65f6\u95f4",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                },
+                "coupon": {
+                    "$ref": "#/definitions/Coupon"
+                }
+            }
+        },
+        "OrderGoods": {
+            "type": "object",
+            "properties": {
+                "order": {
+                    "$ref": "#/definitions/Order"
+                },
+                "goods_sku": {
+                    "$ref": "#/definitions/GoodsSku"
+                },
+                "price": {
+                    "title": "\u4ef7\u683c",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                },
+                "count": {
+                    "title": "\u6570\u91cf",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                },
+                "amount": {
+                    "title": "\u603b\u4ef7",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                }
+            }
+        },
+        "Recommend": {
+            "type": "object",
+            "properties": {
+                "goods_spu": {
+                    "title": "\u5546\u54c1",
+                    "type": "integer",
+                    "x-nullable": true
+                }
+            }
+        },
+        "Refund": {
+            "required": ["refund_id", "goods_status", "reason", "remark", "images", "status"],
+            "type": "object",
+            "properties": {
+                "refund_id": {
+                    "title": "\u9000\u6b3e\u7f16\u53f7",
+                    "type": "string",
+                    "maxLength": 32,
+                    "minLength": 1
+                },
+                "order": {
+                    "$ref": "#/definitions/Order"
+                },
+                "goods_status": {
+                    "title": "\u8d27\u7269\u72b6\u6001",
+                    "description": "0:\u5df2\u6536\u5230\u8d27 1:\u672a\u6536\u5230\u8d27",
+                    "type": "string",
+                    "enum": ["0", "1"]
+                },
+                "amount": {
+                    "title": "\u9000\u6b3e\u91d1\u989d",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                },
+                "reason": {
+                    "title": "\u9000\u6b3e\u539f\u56e0",
+                    "type": "string",
+                    "maxLength": 128,
+                    "minLength": 1
+                },
+                "remark": {
+                    "title": "\u9000\u6b3e\u8bf4\u660e",
+                    "type": "string",
+                    "maxLength": 128,
+                    "minLength": 1
+                },
+                "images": {
+                    "title": "\u9000\u6b3e\u51ed\u8bc1 \u9017\u53f7\u5206\u9694\u7684\u591a\u4e2a\u56fe\u7247url",
+                    "type": "string",
+                    "minLength": 1
+                },
+                "status": {
+                    "title": "\u9000\u6b3e\u72b6\u6001",
+                    "description": "0:\u9000\u6b3e\u7533\u8bf7 1:\u9000\u6b3e\u4e2d 2:\u9000\u6b3e\u5b8c\u6210 3:\u9000\u6b3e\u5931\u8d25",
+                    "type": "string",
+                    "enum": ["0", "1", "2", "3"]
+                },
+                "t_create": {
+                    "title": "\u521b\u5efa\u65f6\u95f4",
+                    "type": "string",
+                    "format": "date-time",
+                    "readOnly": true
+                }
+            }
+        },
+        "UserCoupon": {
+            "required": ["u_coupon"],
+            "type": "object",
+            "properties": {
+                "u_coupon": {
+                    "title": "\u4f18\u60e0\u5238",
+                    "type": "integer"
+                },
+                "hold_count": {
+                    "title": "\u6301\u6709\u6570\u91cf",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                },
+                "left_count": {
+                    "title": "\u5269\u4f59\u6570\u91cf",
+                    "type": "integer",
+                    "maximum": 4294967295,
+                    "minimum": 0
+                }
+            }
+        }
+    }
+}
